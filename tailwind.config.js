@@ -5,7 +5,7 @@ module.exports = {
     fontFamily: {
       rubic: "'Rubik 80s Fade', system-ui",
       suse: "'SUSE', cursive",
-      'm-plus': "'M PLUS 1 Code', monospace"
+      'm-plus': "'M PLUS 1 Code', monospace",
     },
     extend: {
       colors: {
@@ -13,6 +13,7 @@ module.exports = {
         'midnight-indigo': '#111827',
         'golden-saffron': '#b97603',
         'royal-amethyst': '#7e23a5',
+        'light-cream': '#FFFFF6',
       },
     },
   },
