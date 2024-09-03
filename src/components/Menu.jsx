@@ -12,8 +12,8 @@ const Menu = ({ items = [] }) => {
               to={to}
               className={({ isActive }) =>
                 isActive
-                  ? 'border-2 border-royal-amethyst px-3 py-1 rounded text-deep-plum text-sm lg:text-base'
-                  : 'hover:border-b-2 border-b-royal-amethyst text-sm lg:text-base'
+                  ? 'border-2 border-royal-amethyst px-3 py-1 rounded text-deep-plum text-lg'
+                  : 'hover:border-b-2 border-b-royal-amethyst tex-lg'
               }
             >
               {label}

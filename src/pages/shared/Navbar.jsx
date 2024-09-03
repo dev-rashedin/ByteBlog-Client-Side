@@ -21,7 +21,7 @@ const items = [
 const Navbar = () => {
 
   const { theme, toggleTheme } = useTheme();
-  // const { user, logOutUser } = useAuth();
+  const { user, logOutUser } = useAuth();
 
     const navigate = useNavigate();
 
@@ -42,7 +42,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`navbar ${theme.colors.background} py-4 lg:py-6 sticky top-0 z-10`}
+      className={`navbar ${theme.colors.background} py-4 lg:py-8 sticky top-0 z-10 `}
     >
       <div className='navbar-start -ml-2 lg:-ml-0'>
         {/* dropdown */}
@@ -106,7 +106,11 @@ const Navbar = () => {
           </ul>
         </div>
         {/* logo */}
-        <img src={logoImg} alt="" className='w-12 lg:w-14 -ml-6 lg:-ml-0 hidden md:block' />
+        <img
+          src={logoImg}
+          alt=''
+          className='w-12 lg:w-14 -ml-6 lg:-ml-0 hidden md:block'
+        />
         <Link
           to='/'
           className='text-[26px] md:text-3xl lg:text-4xl font-semibold cursor-pointer flex items-center -ml-3 lg:-ml-2 font-rubic text-royal-amethyst'
@@ -114,12 +118,12 @@ const Navbar = () => {
           ByteBlog
         </Link>
       </div>
-      <div className='navbar-center hidden lg:flex'>
+      <div className='navbar-center hidden lg:flex mt-'>
         <ul className='gap-4 px-1'>
           <Menu items={items} />
         </ul>
       </div>
-{/* 
+      {/* 
 
 
 */}
@@ -127,9 +131,9 @@ const Navbar = () => {
         data-aos='zoom-in'
         data-aos-duration='2000'
         data-aos-delay='1000'
-        className='navbar-end flex gap-2 mt-2'
+        className='navbar-end flex gap-2'
       >
-        {/* {user? (
+        {user? (
           <div className='flex gap-2 items-center '>
             <Tooltip title={user.displayName} TransitionComponent={Zoom} arrow>
               <img
@@ -153,10 +157,8 @@ const Navbar = () => {
               <Button type='secondary' label='Sign Up'></Button>
             </Link>
           </div>
-        )} */}
-<Button label='login' type='primary'/>
-<Button label='Register' type='secondary'/>
-
+        )}
+       
         {/* theme controller */}
         <div className='lg:mr-4 outline outline-warm-coral md:flex rounded-full mb-1 md:-mb-0 hidden'>
           <label className='swap swap-rotate'>
@@ -187,7 +189,6 @@ const Navbar = () => {
           </label>
         </div>
       </div>
-
     </div>
   );
 };
