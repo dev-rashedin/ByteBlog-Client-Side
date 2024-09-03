@@ -2,8 +2,8 @@ import Banner from '../home/Banner'
 
 const Home = () => {
   return (
-    <div>
-      <Banner/>
+    <div className='space-y-8'>
+      <Banner />
     </div>
   )
 }

@@ -65,7 +65,7 @@ const Banner = () => {
             key={item.id}
             className={`${index === 1 || index === 2 ? 'col-span-2' : 'col-span-1'
               } bg-${index === 1 || index === 2 ? 'violet-500' : 'orange-400'
-              } p-2 cursor-pointer rounded-md space-y-2 shadow-sm bg-opacity-75 rounded-r-[10%]`}
+              } p-2 cursor-pointer rounded-md space-y-2 shadow-sm bg-opacity-75 rounded-se-[20%] rounded-es-[20%] `}
             onClick={() => setSelectedId(item.id)}
             transition={{ duration: 0.4 }}
             data-aos="zoom-in-right"
@@ -75,14 +75,14 @@ const Banner = () => {
             {index === 0 || index === 3 ? (
               <motion.div>
                 <motion.h2>{item.description.slice(0, 110)}.....</motion.h2>
-                <motion.button className='block border-black rounded-md px-2 mt-3 lg:mt-6 border-b-2 hover:scale-105'>
+                <motion.button className='block border-black rounded-md px-2 mt-3 lg:mt-6 ml-16 border-b-2  hover:scale-105 '>
                   Read More
                 </motion.button>
               </motion.div>
             ) : (
               <motion.div>
                 <motion.h2>{item.description.slice(0, 250)}.....</motion.h2>
-                <motion.button className='block border-black rounded-md px-2 mt-3 lg:mt-6 border-b-2 hover:scale-105'>
+                <motion.button className='block border-black rounded-md px-2 mt-3 lg:mt-6 ml-60 border-b-2 hover:scale-105'>
                   Read More
                 </motion.button>
               </motion.div>
@@ -105,7 +105,7 @@ const Banner = () => {
 
               {/* Centered Selected Card within its own div */}
               <motion.div
-                className='absolute top-[36%] left-[36%] transform -translate-x-1/3 -translate-y-1/3 bg-sky-600 p-8 rounded-md shadow-lg'
+                className='absolute top-[36%] left-[36%] transform -translate-x-1/3 -translate-y-1/3 bg-sky-500 p-8 rounded-md shadow-lg'
                 initial={{ width: '0%', height: '0%', opacity: 0 }}
                 animate={{ width: '90%', height: '80%', opacity: 1 }}
                 exit={{ width: '0%', height: '0%', opacity: 0 }}
