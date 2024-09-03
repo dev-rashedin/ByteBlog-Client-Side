@@ -7,6 +7,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Zoom from '@mui/material/Zoom';
 import { toast } from 'react-toastify';
 import logoImg from '../../assets/logoImg.png'
+import { useEffect, useState } from 'react';
 
 
 
@@ -20,10 +21,20 @@ const items = [
 
 const Navbar = () => {
 
+ const [loading, setLoading] = useState(true);
+  
   const { theme, toggleTheme } = useTheme();
   const { user, logOutUser } = useAuth();
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoading(false); 
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, []);
 
 
 
@@ -42,7 +53,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`navbar ${theme.colors.background} py-4 lg:py-8 sticky top-0 z-10 `}
+      className={`navbar ${theme.colors.background} pt-4 lg:pt-6 -mb-3 lg:mb-4 sticky top-0 z-10`}
     >
       <div className='navbar-start -ml-2 lg:-ml-0'>
         {/* dropdown */}
@@ -127,12 +138,10 @@ const Navbar = () => {
 
 
 */}
-      <div
-        data-aos='zoom-in-down'
-        data-aos-duration='3000'
-        className='navbar-end flex gap-2'
-      >
-        {user? (
+      <div className='navbar-end flex gap-2'>
+        {loading ? (
+          <span className='loading loading-dots loading-lg mr-10'></span>
+        ) : user ? (
           <div className='flex gap-2 items-center '>
             <Tooltip title={user.displayName} TransitionComponent={Zoom} arrow>
               <img
@@ -157,7 +166,7 @@ const Navbar = () => {
             </Link>
           </div>
         )}
-       
+
         {/* theme controller */}
         <div className='lg:mr-4 outline outline-warm-coral md:flex rounded-full mb-1 md:-mb-0 hidden'>
           <label className='swap swap-rotate'>

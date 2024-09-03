@@ -14,6 +14,8 @@
     "@emotion/styled": "^11.13.0",
     "@hookform/resolvers": "^3.9.0",
     "@mui/material": "^6.0.1",
+    "@tanstack/react-query": "^5.53.3",
+    "@tanstack/react-query-devtools": "^5.54.0",
     "aos": "^2.3.4",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.7",

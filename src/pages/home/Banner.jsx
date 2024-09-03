@@ -15,7 +15,7 @@ import 'swiper/css/navigation';
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
-import '../home/Banner.css'
+import '../home/Banner.css';
 
 import carousel1 from '../../assets/carousel1.jpg';
 import carousel2 from '../../assets/carousel2.jpg';
@@ -63,13 +63,15 @@ const Banner = () => {
         {items.map((item, index) => (
           <motion.div
             key={item.id}
-            className={`${index === 1 || index === 2 ? 'col-span-2' : 'col-span-1'
-              } bg-${index === 1 || index === 2 ? 'violet-500' : 'orange-400'
-              } p-2 cursor-pointer rounded-md space-y-2 shadow-sm bg-opacity-75 rounded-se-[20%] rounded-es-[20%] `}
+            className={`${
+              index === 1 || index === 2 ? 'col-span-2' : 'col-span-1'
+            } bg-${
+              index === 1 || index === 2 ? 'violet-500' : 'orange-400'
+            } p-2 cursor-pointer rounded-md space-y-2 shadow-sm bg-opacity-75 rounded-se-[20%] rounded-es-[20%] `}
             onClick={() => setSelectedId(item.id)}
             transition={{ duration: 0.4 }}
-            data-aos="zoom-in-right"
-            data-aos-duration="3000"
+            data-aos='zoom-in-right'
+            data-aos-duration='3000'
           >
             <motion.div className='font-semibold'>{item.title}</motion.div>
             {index === 0 || index === 3 ? (
@@ -131,8 +133,8 @@ const Banner = () => {
 
       <div
         className='lg:w-1/2 h-[500px] m-5 lg:m-0'
-        data-aos="fade-left"
-        data-aos-duration="3000"
+        data-aos='fade-left'
+        data-aos-duration='3000'
       >
         <Swiper
           spaceBetween={30}
@@ -155,7 +157,7 @@ const Banner = () => {
           {/* slide 1 */}
           <SwiperSlide>
             <img
-              className='h-[500px] w-full rounded-md'
+              className='h-[500px] w-full rounded-xl'
               src={carousel1}
               alt=''
             />
@@ -163,7 +165,7 @@ const Banner = () => {
           {/* slide 2 */}
           <SwiperSlide>
             <img
-              className='h-[500px] w-full rounded-md'
+              className='h-[500px] w-full rounded-xl'
               src={carousel2}
               alt=''
             />
@@ -172,7 +174,7 @@ const Banner = () => {
           <SwiperSlide>
             <div>
               <img
-                className='h-[500px] w-full rounded-md'
+                className='h-[500px] w-full rounded-xl'
                 src={carousel3}
                 alt=''
               />

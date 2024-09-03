@@ -1,10 +1,64 @@
+import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import useAuth from '../hooks/useAuth';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const AddBlog = () => {
   const { user } = useAuth();
+   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-  const handleFormSubmit = (e) => {};
+  
+  
+  const { mutateAsync } = useMutation({
+    mutationFn: async (postData) => {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/posts`,
+        postData
+      );
+      return data;
+    },
+    onSuccess: (data) => {
+      if (data.insertedId) {
+        toast.success('Your job is posted successfully');
+        navigate('/')
+      }
+    },
+    onError: (error) => {
+      console.log(error.message);
+      toast.error(error.message);
+    },
+  });
+
+  const handleFormSubmit = async(e) => {
+    e.preventDefault();
+    const form = e.target;
+    const post_title = form.post_title.value;
+    const email = form.email.value;
+    const category = form.category.value;
+    const image = form.image.value;
+    const short_description = form.short_description.value;
+    const long_description = form.long_description.value;
+
+    const postData = {
+      post_title,
+      email,
+      category,
+      image,
+      short_description,
+      long_description,
+      createdAt: new Date(),
+    };
+
+  try {
+    await mutateAsync(postData);
+    form.reset()
+  } catch (error) {
+    toast.error(error)
+  }
+  };
 
   return (
     <div className='px-5 lg:px-40'>
