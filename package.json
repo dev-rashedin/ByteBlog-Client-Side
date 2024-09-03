@@ -14,9 +14,11 @@
     "@emotion/styled": "^11.13.0",
     "@hookform/resolvers": "^3.9.0",
     "@mui/material": "^6.0.1",
+    "aos": "^2.3.4",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.7",
     "firebase": "^10.13.1",
+    "framer-motion": "^11.3.31",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
     "react": "^18.3.1",
@@ -29,6 +31,7 @@
     "react-toastify": "^10.0.5",
     "sort-by": "^1.2.0",
     "sweetalert2": "^11.12.4",
+    "swiper": "^11.1.12",
     "zod": "^3.23.8"
   },
   "devDependencies": {

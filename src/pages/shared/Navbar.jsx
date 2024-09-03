@@ -128,9 +128,8 @@ const Navbar = () => {
 
 */}
       <div
-        data-aos='zoom-in'
-        data-aos-duration='2000'
-        data-aos-delay='1000'
+        data-aos='zoom-in-down'
+        data-aos-duration='3000'
         className='navbar-end flex gap-2'
       >
         {user? (
