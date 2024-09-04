@@ -53,9 +53,9 @@ const Navbar = () => {
 
   return (
     <div
-      className={`navbar ${theme.colors.background} pt-4 lg:pt-6 -mb-3 lg:mb-4 sticky top-0 z-10`}
+      className={`navbar ${theme.colors.background} pt-4 lg:pt-6 -mb-3 lg:mb-8 sticky top-0 z-10`}
     >
-      <div className='navbar-start -ml-2 lg:-ml-0'>
+      <div className='navbar-start -ml-2 lg:-ml-4'>
         {/* dropdown */}
         <div className='dropdown'>
           <div
@@ -120,15 +120,16 @@ const Navbar = () => {
         <img
           src={logoImg}
           alt=''
-          className='w-12 lg:w-14 -ml-6 lg:-ml-0 hidden md:block'
+          className='w-12 lg:w-16  xl:w-[75px] -ml-6 lg:-ml-0 hidden md:block'
         />
         <Link
           to='/'
-          className='text-[26px] md:text-3xl lg:text-4xl font-semibold cursor-pointer flex items-center -ml-3 lg:-ml-2 font-rubic text-royal-amethyst'
+          className='text-[26px] md:text-3xl lg:text-4xl xl:text-5xl font-semibold cursor-pointer flex items-center -ml-3 lg:-ml-2 font-rubic text-royal-amethyst'
         >
           ByteBlog
         </Link>
       </div>
+      {/* nav center */}
       <div className='navbar-center hidden lg:flex mt-'>
         <ul className='gap-4 px-1'>
           <Menu items={items} />
@@ -136,15 +137,16 @@ const Navbar = () => {
       </div>
       {/* 
 
-
+navbar end
 */}
-      <div className='navbar-end flex gap-2'>
+      <div className='navbar-end flex gap-2 mr-4 lg:-mr-4'>
         {loading ? (
           <span className='loading loading-dots loading-lg mr-10'></span>
         ) : user ? (
           <div className='flex gap-2 items-center '>
             <Tooltip title={user.displayName} TransitionComponent={Zoom} arrow>
               <img
+                referrerPolicy='no-referrer'
                 className='h-9 w-9 md:h-10 md:w-10 rounded-full mb-2 md:mb-0'
                 src={user.photoURL}
                 alt='User Pic'

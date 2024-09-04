@@ -4,6 +4,7 @@ import useAuth from '../hooks/useAuth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import SectionTitle from '../components/SectionTitle';
 
 const AddBlog = () => {
   const { user } = useAuth();
@@ -22,8 +23,8 @@ const AddBlog = () => {
     },
     onSuccess: (data) => {
       if (data.insertedId) {
-        toast.success('Your job is posted successfully');
-        navigate('/')
+        toast.success('Your blog is posted successfully');
+        navigate('/#recent-posts')
       }
     },
     onError: (error) => {
@@ -32,6 +33,7 @@ const AddBlog = () => {
     },
   });
 
+  // handle form submit
   const handleFormSubmit = async(e) => {
     e.preventDefault();
     const form = e.target;
@@ -61,13 +63,9 @@ const AddBlog = () => {
   };
 
   return (
-    <div className='px-5 lg:px-40'>
-      <div className='border-2 border-golden-saffron w-1/3 mx-auto border-dashed my-4 p-1 rounded-lg'>
-        <h2 className='text-xl font-semibold font-m-plus uppercase text-center '>
-          Write a Blog
-        </h2>
-      </div>
-      <section className='p-6 mx-auto bg-white bg-opacity-0 rounded-md shadow-2xl '>
+    <div className='px-5 lg:px-40 pt-4 space-y-8'>
+      <SectionTitle title='Write a Blog' />
+      <section className='p-6 mx-auto bg-white bg-opacity-0 rounded-md shadow-2xl border-2 border-royal-amethyst border-opacity-75 border-t-4 border-r-4 border-dotted'>
         <form onSubmit={handleFormSubmit}>
           <div className='grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2'>
             <div>
@@ -78,6 +76,7 @@ const AddBlog = () => {
                 id='post_title'
                 name='post_title'
                 type='text'
+                required
                 className='block w-full px-4 py-2 mt-2 border border-gray-300 rounded-md  focus:border-royal-amethyst '
               />
             </div>
@@ -90,6 +89,9 @@ const AddBlog = () => {
                 id='emailAddress'
                 type='email'
                 name='email'
+                required
+                readOnly={user}
+                defaultValue={user && user.email}
                 className='block w-full px-4 py-2 mt-2 border border-gray-300 rounded-md  focus:border-royal-amethyst '
               />
             </div>
@@ -128,6 +130,7 @@ const AddBlog = () => {
           <div className='flex flex-col gap-2 mt-4'>
             <label htmlFor='short_description'>Short Description</label>
             <textarea
+              required
               className='block w-full px-4 py-2 mt-2 border border-gray-300 rounded-md  focus:border-royal-amethyst'
               name='short_description'
               id='short_description'
@@ -137,6 +140,7 @@ const AddBlog = () => {
           <div className='flex flex-col gap-2 mt-4'>
             <label htmlFor='long_description'>Long Description</label>
             <textarea
+              required
               className='block w-full px-4 py-2 mt-2 border border-gray-300 rounded-md  focus:border-royal-amethyst'
               name='long_description'
               id='long_description'

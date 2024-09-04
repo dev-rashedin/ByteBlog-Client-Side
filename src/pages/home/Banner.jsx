@@ -50,6 +50,7 @@ const items = [
 
 const Banner = () => {
   const [selectedId, setSelectedId] = useState(null);
+   const [descriptionLength, setDescriptionLength] = useState(110); 
 
   useEffect(() => {
     AOS.init({
@@ -57,34 +58,52 @@ const Banner = () => {
     });
   }, []);
 
+  // Default for large screens
+
+ useEffect(() => {
+   const updateDescriptionLength = () => {
+     if (window.innerWidth >= 1280) {
+       setDescriptionLength(250); 
+     } else if (window.innerWidth >= 1024) {
+       setDescriptionLength(110); 
+     } 
+   };
+
+   window.addEventListener('resize', updateDescriptionLength);
+   updateDescriptionLength(); 
+
+   return () => window.removeEventListener('resize', updateDescriptionLength);
+ }, []);
+
   return (
-    <div className='flex flex-col-reverse lg:flex-row gap-x-4'>
-      <div className=' relative lg:w-1/2 grid grid-cols-3 gap-2 h-[500px] m-5 lg:m-0'>
+    <div className='flex flex-col-reverse lg:flex-row gap-x-4 lg:mx-2'>
+      {/* left side: framer motion */}
+      <div className='hidden relative lg:w-1/2 lg:grid lg:grid-cols-1 xl:grid-cols-3 gap-2 h-[500px] m-5 lg:m-0'>
         {items.map((item, index) => (
           <motion.div
             key={item.id}
             className={`${
-              index === 1 || index === 2 ? 'col-span-2' : 'col-span-1'
+              index === 1 || index === 2 ? 'col-span-1 xl:col-span-2' : 'col-span-1'
             } bg-${
-              index === 1 || index === 2 ? 'violet-500' : 'orange-400'
-            } p-2 cursor-pointer rounded-md space-y-2 shadow-sm bg-opacity-75 rounded-se-[20%] rounded-es-[20%] `}
+              index === 1 || index === 2 ? 'royal-amethyst' : 'golden-saffron'
+            } p-2 cursor-pointer rounded-xl space-y-2 shadow-sm bg-opacity-75 rounded-se-[3rem] rounded-es-[3rem]`}
             onClick={() => setSelectedId(item.id)}
             transition={{ duration: 0.4 }}
             data-aos='zoom-in-right'
             data-aos-duration='3000'
           >
-            <motion.div className='font-semibold'>{item.title}</motion.div>
+            <motion.div className='font-semibold -mb-[3px] xl:-mb--0'>{item.title}</motion.div>
             {index === 0 || index === 3 ? (
               <motion.div>
                 <motion.h2>{item.description.slice(0, 110)}.....</motion.h2>
-                <motion.button className='block border-black rounded-md px-2 mt-3 lg:mt-6 ml-16 border-b-2  hover:scale-105 '>
+                <motion.button className=' border-black rounded-xl px-2 xl:mt-6  ml-[330px] xl:ml-16 border-b-2  hover:scale-105'>
                   Read More
                 </motion.button>
               </motion.div>
             ) : (
               <motion.div>
-                <motion.h2>{item.description.slice(0, 250)}.....</motion.h2>
-                <motion.button className='block border-black rounded-md px-2 mt-3 lg:mt-6 ml-60 border-b-2 hover:scale-105'>
+                <motion.h2>{item.description.slice(0, descriptionLength)}.....</motion.h2>
+                <motion.button className='block border-black rounded-xl px-2 xl:mt-6 ml-[330px] xl:ml-60 border-b-2 hover:scale-105'>
                   Read More
                 </motion.button>
               </motion.div>
@@ -101,17 +120,17 @@ const Banner = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                onClick={() => setSelectedId(null)} // Close modal when clicking outside
-                transition={{ duration: 0.3 }} // Smooth transition for blur
+                onClick={() => setSelectedId(null)}
+
+                transition={{ duration: 0.3 }}
               />
 
-              {/* Centered Selected Card within its own div */}
               <motion.div
                 className='absolute top-[36%] left-[36%] transform -translate-x-1/3 -translate-y-1/3 bg-sky-500 p-8 rounded-md shadow-lg'
                 initial={{ width: '0%', height: '0%', opacity: 0 }}
                 animate={{ width: '90%', height: '80%', opacity: 1 }}
                 exit={{ width: '0%', height: '0%', opacity: 0 }}
-                transition={{ duration: 0.4 }} // Smooth transition for card
+                transition={{ duration: 0.4 }}
               >
                 <motion.h5 className='mb-3 font-semibold'>
                   {items.find((item) => item.id === selectedId)?.title}
@@ -130,7 +149,7 @@ const Banner = () => {
           )}
         </AnimatePresence>
       </div>
-
+{/* right side : swiper */}
       <div
         className='lg:w-1/2 h-[500px] m-5 lg:m-0'
         data-aos='fade-left'

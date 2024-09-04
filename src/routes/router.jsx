@@ -5,6 +5,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import AddBlog from '../pages/AddBlog';
 import ErrorPage from './../error/ErrorPage';
+import AllBlogs from './../pages/AllBlogs';
 
 
 
@@ -18,9 +19,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home />,
-        loader: () => fetch('http://localhost:5000/posts'),
+        element: <Home />
       },
+      {
+        path: '/allBlogs',
+        element: <AllBlogs/>
+    },
       {
         path: '/addBlog',
         element: <AddBlog />,

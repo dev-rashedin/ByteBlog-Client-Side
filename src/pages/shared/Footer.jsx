@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <div className='bg-slate-950'>
       <div>
-        <footer className='footer text-light-cream opacity-90 items-center px-[26px] lg:px-6 py-6 max-w-7xl mx-auto flex justify-between font-m-plus'>
+        <footer className='footer text-light-cream opacity-90 items-center px-[26px] lg:px-6 py-[26.5px] max-w-7xl mx-auto flex justify-between font-m-plus'>
           <aside className=' items-center'>
             <div className='flex gap-4 items-center'>
               <svg
