@@ -92,18 +92,18 @@ const Banner = () => {
             data-aos='zoom-in-right'
             data-aos-duration='3000'
           >
-            <motion.div className='font-semibold -mb-[3px] xl:-mb--0'>{item.title}</motion.div>
+            <motion.div className='font-semibold -mb-[3px] xl:-mb--0 xl:pt-2'>{item.title}</motion.div>
             {index === 0 || index === 3 ? (
               <motion.div>
                 <motion.h2>{item.description.slice(0, 110)}.....</motion.h2>
-                <motion.button className=' border-black rounded-xl px-2 xl:mt-6  ml-[330px] xl:ml-16 border-b-2  hover:scale-105'>
+                <motion.button className=' border-black rounded-xl px-2 xl:mt-4  ml-[330px] xl:ml-16 border-b-2  hover:scale-105'>
                   Read More
                 </motion.button>
               </motion.div>
             ) : (
               <motion.div>
                 <motion.h2>{item.description.slice(0, descriptionLength)}.....</motion.h2>
-                <motion.button className='block border-black rounded-xl px-2 xl:mt-6 ml-[330px] xl:ml-60 border-b-2 hover:scale-105'>
+                <motion.button className='block border-black rounded-xl px-2 xl:mt-4 ml-[330px] xl:ml-60 border-b-2 hover:scale-105'>
                   Read More
                 </motion.button>
               </motion.div>

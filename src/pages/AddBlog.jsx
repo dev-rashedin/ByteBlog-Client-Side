@@ -63,7 +63,7 @@ const AddBlog = () => {
   };
 
   return (
-    <div className='px-5 lg:px-40 pt-4 space-y-8'>
+    <div className='px-5 lg:px-40 pt-8 lg:pt-4 space-y-8 pb-8'>
       <SectionTitle title='Write a Blog' />
       <section className='p-6 mx-auto bg-white bg-opacity-0 rounded-md shadow-2xl border-2 border-royal-amethyst border-opacity-75 border-t-4 border-r-4 border-dotted'>
         <form onSubmit={handleFormSubmit}>

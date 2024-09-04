@@ -8,7 +8,7 @@ const Root = () => {
   return (
     <div className={`${theme}`}>
       <div
-        className={`max-w-7xl mx-auto lg:px-4 font-suse ${theme?.colors?.background} ${theme?.colors?.textPrimary} min-h-[83vh] pb-4`}
+        className={`max-w-7xl mx-auto lg:px-4 font-suse ${theme?.colors?.background} ${theme?.colors?.textPrimary} min-h-[83vh] pb-8`}
       >
         <Navbar />
         <Outlet />

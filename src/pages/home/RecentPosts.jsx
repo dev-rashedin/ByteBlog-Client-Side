@@ -42,11 +42,11 @@ const RecentPosts = () => {
     );
 
   return (
-    <div id='recent-posts' className="pt-8 space-y-8 lg:space-y-10">
+    <div id='recent-posts' className="lg:pt-4 space-y-8 lg:space-y-10">
      <SectionTitle title='Recent Posts'/>
 
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-4 mx-5 lg:mx-3'>
-        {posts?.map((post) => (
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-6 mx-5 lg:mx-3'>
+        {posts?.slice(0, 6).map((post) => (
           <PostCard key={post._id} post={post} />
         ))}
       </div>
