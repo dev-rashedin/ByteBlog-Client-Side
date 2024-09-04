@@ -16,6 +16,7 @@ const AllBlogs = () => {
   const [search, setSearch] = useState('');
   const [searchText, setSearchText] = useState('');
 
+  // getting posts count
    useEffect(() => {
      const getCount = async () => {
        const { data } = await axios(
@@ -29,6 +30,7 @@ const AllBlogs = () => {
      getCount();
    }, [filter, search]);
 
+  // getting post data
     const {
       data: posts,
       isLoading,
@@ -48,25 +50,7 @@ const AllBlogs = () => {
         console.log('Error fetching data:', error);
       },
     });
-
-    // handling loading state
-    if (isLoading)
-      return (
-        <div className='flex items-center justify-center min-h-screen text-yellow-500'>
-          Data Loading{' '}
-          <span className='loading loading-dots loading-md mr-10'></span>
-        </div>
-      );
-
-    // handling error
-    if (isError)
-      return (
-        <p className='flex items-center justify-center min-h-screen text-red-400'>
-          {error.message}
-        </p>
-      );
-
-
+  
   const postsPerPage = Math.ceil(count / itemsPerPage);
 
   const pages = [...Array(postsPerPage).keys()].map((ell) => ell + 1);
@@ -102,11 +86,29 @@ const AllBlogs = () => {
     setSearch(searchText);
   };
 
-  console.log(search);
+    // handling loading state
+    if (isLoading)
+      return (
+        <div className='flex items-center justify-center min-h-screen text-yellow-500'>
+          Data Loading{' '}
+          <span className='loading loading-dots loading-md mr-10'></span>
+        </div>
+      );
+
+    // handling error
+    if (isError)
+      return (
+        <p className='flex items-center justify-center min-h-screen text-red-400'>
+          {error.message}
+        </p>
+      );
 
   return (
     <div id='recent-posts' className='lg:pt-4 space-y-8 lg:space-y-10'>
       <SectionTitle title='All Posts' />
+
+      {/* searching and sorting */}
+
       <div className='flex flex-col md:flex-row justify-center items-center gap-5 '>
         {/* category */}
         <div>
@@ -214,7 +216,7 @@ const AllBlogs = () => {
           <button
             key={btnNum}
             onClick={() => handleCurrentPage(btnNum)}
-            className={`hidde px-4 py-2 mx-1 transition-colors duration-300 transform  rounded-md sm:inline hover:bg-royal-amethyst  hover:text-white ${
+            className={`px-4 py-2 mx-1 transition-colors duration-300 transform  rounded-md sm:inline hover:bg-royal-amethyst  hover:text-white ${
               currentPage === btnNum ? 'bg-golden-saffron  text-white' : ''
             } `}
           >
@@ -226,7 +228,9 @@ const AllBlogs = () => {
         <button
           onClick={handleNextBtn}
           disabled={currentPage === pages.length}
-          className='px-4 py-2 mx-1 bg-royal-amethyst text-light-ash transition-colors duration-300 transform rounded-md hover:bg-golden-saffron disabled:hover:bg-gray-200 disabled:hover:text-gray-500 hover:text-midnight-indigo disabled:cursor-not-allowed disabled:text-gray-500'
+          className='px-4 py-2 mx-1 bg-royal-amethyst text-light-ash transition-colors duration-300 transform rounded-md hover:bg-golden-saffron disabled:hover:bg-gray-200 disabled:hover:text-gray-500 hover:text-midnight-indigo disabled:cursor-not-allowed 
+          disabled:bg-gray-200
+          disabled:text-gray-500'
         >
           <div className='flex items-center -mx-1'>
             <span className='mx-1'>Next</span>
@@ -247,6 +251,7 @@ const AllBlogs = () => {
             </svg>
           </div>
         </button>
+        {/*   */}
         <select
           onChange={(e) => {
             setItemsPerPage(e.target.value);

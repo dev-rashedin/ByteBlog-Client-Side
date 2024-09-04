@@ -6,6 +6,8 @@ import Register from '../pages/Register';
 import AddBlog from '../pages/AddBlog';
 import ErrorPage from './../error/ErrorPage';
 import AllBlogs from './../pages/AllBlogs';
+import BlogDetails from '../pages/BlogDetails';
+import UpdateBlog from '../pages/UpdateBlog';
 
 
 
@@ -19,15 +21,24 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home />
+        element: <Home />,
       },
       {
         path: '/allBlogs',
-        element: <AllBlogs/>
-    },
+        element: <AllBlogs />,
+      },
       {
         path: '/addBlog',
         element: <AddBlog />,
+      },
+      {
+        path: '/posts/:id',
+        element: <BlogDetails />,
+        loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/posts/${params.id}`),
+      },
+      {
+        path: '/update',
+        element: <UpdateBlog/>
       },
       {
         path: '/login',
