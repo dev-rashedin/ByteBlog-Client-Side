@@ -8,7 +8,9 @@ const CommentCard = ({ comment }) => {
   return (
     <div>
       <div className='flex items-center mb-2'>
-        <img className='w-8 rounded-full' src={comment.user.photoURL} alt="Commenter's picture" />
+        <img
+          referrerPolicy='no-referrer'
+          className='w-8 rounded-full' src={comment.user.photoURL} alt="Commenter's picture" />
         <p className='text-lg font-semibold  ml-2'>
           {comment.user.displayName}
         </p>

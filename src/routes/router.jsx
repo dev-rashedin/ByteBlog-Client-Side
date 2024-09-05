@@ -34,10 +34,10 @@ const router = createBrowserRouter([
       {
         path: '/posts/:id',
         element: <BlogDetails />,
-        loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/posts/${params.id}`),
+        // loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/posts/${params.id}`),
       },
       {
-        path: '/update',
+        path: '/update/:id',
         element: <UpdateBlog/>
       },
       {

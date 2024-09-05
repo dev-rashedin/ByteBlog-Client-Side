@@ -65,7 +65,7 @@ const BlogDetails = () => {
     onSuccess: (data) => {
       if (data.insertedId) {
         toast.success('Your comment is posted successfully');
-        queryClient.invalidateQueries({ queryKey: ['post']})
+        queryClient.invalidateQueries({ queryKey: ['comments']})
       }
     },
     onError: (error) => {
@@ -85,6 +85,25 @@ const BlogDetails = () => {
      long_description,
    } = post;
 
+  
+   const handleComment = async (e) => {
+     e.preventDefault();
+     const comment = e.target.comment.value;
+
+     const commentDetails = {
+       comment,
+       blog_id: _id,
+       user,
+     };
+
+     try {
+       await mutateAsync(commentDetails);
+       e.target.reset();
+     } catch (error) {
+       toast.error(error);
+     }
+   };
+  
   // handling error
   if (isError)
     return (
@@ -101,29 +120,6 @@ const BlogDetails = () => {
         <span className='loading loading-dots loading-md mr-10'></span>
       </div>
     );
-
-  const handleComment = async(e) => {
-    e.preventDefault()
-    const comment = e.target.comment.value;
-
-    const commentDetails = {
-      comment,
-      blog_id: _id,
-      user
-    }
-    
-    try {
-      await mutateAsync(commentDetails);
-      e.target.reset();
-    } catch (error) {
-      toast.error(error);
-    }
-    
-  }
-
-  console.log(comments)
-  
-
 
 
   return (
@@ -199,9 +195,9 @@ const BlogDetails = () => {
             {long_description}
           </p>
         </div>
-        <div className='flex justify-end mt-2'>
+        <div className='flex justify-end mt-6'>
           {user?.email === post?.email ? (
-            <Link to='/update'>
+            <Link to={`/update/${id}`}>
               <Button type='primary' label='Update Your Post' />
             </Link>
           ) : (
