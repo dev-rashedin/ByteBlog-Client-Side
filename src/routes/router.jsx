@@ -8,6 +8,7 @@ import ErrorPage from './../error/ErrorPage';
 import AllBlogs from './../pages/AllBlogs';
 import BlogDetails from '../pages/BlogDetails';
 import UpdateBlog from '../pages/UpdateBlog';
+import PrivateRoute from './PrivateRoute';
 
 
 
@@ -33,12 +34,16 @@ const router = createBrowserRouter([
       },
       {
         path: '/posts/:id',
-        element: <BlogDetails />,
+        element: (
+          <PrivateRoute>
+            <BlogDetails />
+          </PrivateRoute>
+        ),
         // loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/posts/${params.id}`),
       },
       {
         path: '/update/:id',
-        element: <UpdateBlog/>
+        element: <UpdateBlog />,
       },
       {
         path: '/login',
