@@ -4,19 +4,22 @@ import { Link, useLoaderData, useParams } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
 import Button from "../components/Button";
+import CommentCard from "../components/CommentCard";
+import SectionTitle from "../components/SectionTitle";
 
 
 
 const BlogDetails = () => {
   const {user} = useAuth()
   const { id } = useParams();
+  
    const queryClient = useQueryClient();
 
   // const post = useLoaderData()
 
   // getting post data
   const {
-    data: post = {},
+    data: post = [],
     isLoading,
     isError,
     error,
@@ -34,12 +37,28 @@ const BlogDetails = () => {
     enabled: !!id,
   });
 
+  // getting comment data
+  const {
+    data: comments = [],
+  } = useQuery({
+    queryKey: ['comments', id],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/comments/${id}`
+      );
+      return data;
+    },
+    onError: (error) => {
+      console.log('Error fetching data:', error);
+    }
+  });
+
   // posting comment
   const { mutateAsync } = useMutation({
-    mutationFn: async (comment) => {
+    mutationFn: async (commentDetails) => {
       const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/posts`,
-        comment
+        `${import.meta.env.VITE_API_URL}/comments`,
+        commentDetails
       );
       return data;
     },
@@ -55,7 +74,8 @@ const BlogDetails = () => {
     },
   });
 
-   const {
+  const {
+     _id,
      post_title,
      category,
      image,
@@ -85,15 +105,24 @@ const BlogDetails = () => {
   const handleComment = async(e) => {
     e.preventDefault()
     const comment = e.target.comment.value;
+
+    const commentDetails = {
+      comment,
+      blog_id: _id,
+      user
+    }
     
     try {
-      await mutateAsync(comment);
+      await mutateAsync(commentDetails);
       e.target.reset();
     } catch (error) {
       toast.error(error);
     }
     
   }
+
+  console.log(comments)
+  
 
 
 
@@ -106,7 +135,7 @@ const BlogDetails = () => {
         <div className='ml-1'>
           <p>
             <span className='italic text-lg font-semibold '>Post Title:</span>
-            <span className='text-lg lg:text-xl font-bold ml-2 font-m-plus'>
+            <span className='text-lg lg:text-xl font-bold ml-2'>
               {post_title}
             </span>
           </p>
@@ -116,7 +145,7 @@ const BlogDetails = () => {
           </p>
         </div>
         {/* image */}
-        <div className='mt-2'>
+        <div className='mt-5'>
           <img
             className='rounded-xl mx-auto w-full h-[300px] lg:h-[400px] mb-4 mt-4'
             src={image}
@@ -124,7 +153,7 @@ const BlogDetails = () => {
           />
         </div>
         {/* time and category */}
-        <div className='flex items-center justify-between mt-6 mb-4'>
+        <div className='flex items-center justify-between mt-8 mb-4'>
           <p className='border-2 border-royal-amethyst px-2 py-1 rounded-md'>
             <span className='italic mr-2'>Published At: </span>
             <span className='font-semibold'>
@@ -181,32 +210,47 @@ const BlogDetails = () => {
         </div>
       </div>
 
-      {/* comment area */}  
-      {user?.email === post?.email ? (
-        <p className='text-xl text-center border-2 border-golden-saffron mx-auto py-2 border-dashed'>
-          Blog owner cannot comment on his own post
-        </p>
-      ) : (
-        <div className='max-w-2xl mx-auto '>
-          <h3 className='text-xl font-semibold  mb-2 border-b-2 text-center border-golden-saffron w-1/2 lg:w-[40%] mx-auto rounded-xl font-m-plus'>
-            Post your comment here
-          </h3>
-          <form onSubmit={handleComment} className='flex flex-col items-end'>
-            <textarea
-              required
-              className='block 
+      {/* posting comment area */}
+      <>
+        {user?.email === post?.email ? (
+          <p className='text-xl text-center border-2 border-golden-saffron mx-auto py-2 border-dashed'>
+            Blog owner cannot comment on his own post
+          </p>
+        ) : (
+          <div className='max-w-2xl mx-auto '>
+            <h3 className='text-xl font-semibold  mb-2 border-b-2 text-center border-golden-saffron w-1/2 lg:w-[40%] mx-auto rounded-xl font-m-plus'>
+              Post your comment here
+            </h3>
+            <form onSubmit={handleComment} className='flex flex-col items-end'>
+              <textarea
+                disabled={!user}
+                placeholder={
+                  user ? 'Typing....' : 'You need to login first to comment'
+                }
+                required
+                className='block 
            bg-transparent w-full px-4 py-2 mt-2 border border-gray-600 rounded-md  focus:border-royal-amethyst'
-              name='comment'
-              id='comment'
-            ></textarea>
-            <input
-              className='btn sm:btn-sm md:btn-md bg-royal-amethyst hover:bg-golden-saffron text-white w-1/3 mt-4'
-              type='submit'
-              value='Comment'
-            />
-          </form>
-        </div>
-      )}
+                name='comment'
+                id='comment'
+              ></textarea>
+              <input
+                className='btn sm:btn-sm md:btn-md bg-royal-amethyst hover:bg-golden-saffron text-white w-1/3 mt-4'
+                type='submit'
+                value='Comment'
+              />
+            </form>
+          </div>
+        )}
+      </>
+
+      {/* displaying all comment */}
+      <div className='space-y-6 max-w-2xl mx-auto'>
+        <SectionTitle title='All Comments' />
+
+        {comments?.map((comment) => (
+          <CommentCard key={comment._id} comment={comment} />
+        ))}
+      </div>
     </div>
   );
 }
