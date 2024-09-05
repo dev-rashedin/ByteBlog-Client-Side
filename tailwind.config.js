@@ -10,7 +10,7 @@ module.exports = {
     extend: {
       colors: {
         'light-ash': '#EAEAEA',
-        'midnight-indigo': '#111827',
+        'midnight-indigo': '#111837',
         'golden-saffron': '#b97603',
         'royal-amethyst': '#7e23a5',
         'light-cream': '#FFFFF6',

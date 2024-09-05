@@ -64,7 +64,7 @@ const PostCard = ({ post }) => {
         <div className='flex items-center'>
           <button
             onClick={handleWishlist}
-            className='font-semibold  cursor-pointer border-2 border-golden-saffron px-2 border-opacity-45 rounded-lg hover:border-opacity-100'
+            className='font-semibold  cursor-pointer border-2 border-golden-saffron px-2 border-opacity-45 rounded-lg hover:border-opacity-100 font-m-plus'
           >
             Wishlist
           </button>

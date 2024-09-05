@@ -93,11 +93,25 @@
   },
   {
     "category": "MongoDB",
-    "posts": [
+    "posts":  [
       {
         "title": "Getting Started with MongoDB: A NoSQL Database",
         "image_url": "https://example.com/images/mongodb-basics.jpg",
         "short_description": "An introduction to MongoDB, a popular NoSQL database, and how to get started with it.",
-        "long_description": "MongoDB is a leading NoSQL database that offers flexibility and scalability for modern applications. This post introduces you to the basics of MongoDB, including its document-oriented data model, how to set up a MongoDB database, and how to perform basic CRUD operations. Whether you're new to NoSQL databases or looking to expand your skills, this guide provides the foundational knowledge you need to start working with MongoDB"
-      }]
+        "long_description": "MongoDB is a leading NoSQL database that offers flexibility and scalability for modern applications. This post introduces you to the basics of MongoDB, including its document-oriented data model, how to set up a MongoDB database, and how to perform basic CRUD operations. Whether you're new to NoSQL databases or looking to expand your skills, this guide provides the foundational knowledge you need to start working with MongoDB."
+      },
+      {
+        "title": "Mastering Flexbox: The Future of Responsive Design",
+        "image_url": "https://example.com/images/flexbox-master.jpg",
+        "short_description": "Learn how to use Flexbox to create responsive layouts that adapt to different screen sizes.",
+        "long_description": "Flexbox is one of the most powerful tools in CSS for creating flexible, responsive layouts. This post dives into the core concepts of Flexbox, including the flex container, flex items, and how to use properties like align-items, justify-content, and flex-grow to create responsive designs. If you're looking to master modern web layouts, this comprehensive guide to Flexbox is essential."
+      },
+      {
+        "title": "Understanding Node.js Streams: A Deep Dive",
+        "image_url": "https://example.com/images/nodejs-streams.jpg",
+        "short_description": "Explore the power of Node.js streams for handling data efficiently.",
+        "long_description": "Node.js streams are a powerful way to process large amounts of data efficiently. In this post, we take a deep dive into the different types of streams—readable, writable, duplex, and transform—and how they work under the hood. Whether you're dealing with file I/O or HTTP requests, mastering streams will help you build more scalable and efficient applications. This guide provides examples and practical use cases to get you started."
+      }
+    ]
   }
+]
