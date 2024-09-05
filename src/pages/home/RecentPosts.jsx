@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import PostCard from "../../components/PostCard"
 import axios from "axios";
 import SectionTitle from "../../components/SectionTitle";
+import {Fade} from "react-awesome-reveal"
 
 
 const RecentPosts = () => {
@@ -42,13 +43,26 @@ const RecentPosts = () => {
     );
 
   return (
-    <div id='recent-posts' className="lg:pt-4 space-y-8 lg:space-y-10">
-     <SectionTitle title='Recent Posts'/>
+    <div>
+      <div id='recent-posts' className='lg:pt-4 space-y-8 lg:space-y-10'>
+        <SectionTitle title='Recent Posts' />
 
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-6 mx-5 lg:mx-3'>
-        {posts?.slice(0, 6).map((post) => (
-          <PostCard key={post._id} post={post} />
-        ))}
+        
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-6 mx-5 lg:mx-3'>
+            {posts?.slice(0, 6).map((post, index) => (
+              <Fade
+                key={post._id}
+                cascade
+                damping={0.3}
+                direction='up'
+                triggerOnce
+                duration={3000}
+                delay={index * 200}
+              >
+                <PostCard post={post} />
+              </Fade>
+            ))}
+          </div>
       </div>
     </div>
   );

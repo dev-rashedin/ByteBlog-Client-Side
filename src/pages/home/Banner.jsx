@@ -58,8 +58,6 @@ const Banner = () => {
     });
   }, []);
 
-  // Default for large screens
-
  useEffect(() => {
    const updateDescriptionLength = () => {
      if (window.innerWidth >= 1280) {

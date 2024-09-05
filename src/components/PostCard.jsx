@@ -49,14 +49,14 @@ const PostCard = ({ post }) => {
         <img className="rounded-xl mx-auto md:w-full h-[200px] mb-4 mt-4" src={image} alt='' />
         <p className='text-lg font-bold '>{post_title}</p>
 
-        <p className='mt-2'>{short_description}</p>
+        <p className='mt-2'>{short_description.slice(0, 75)}....</p>
       </div>
 
       {/* read more & wishlist btn */}
       <div className='flex items-center justify-between mt-4'>
         <Link
           to={`/posts/${_id}`}
-          className='text-royal-amethyst font-semibold hover:underline '
+          className='text-golden-saffron font-semibold hover:underline '
         >
           Read more
         </Link>

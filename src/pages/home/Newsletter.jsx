@@ -9,12 +9,11 @@ const Newsletter = () => {
    const [errorMessage, setErrorMessage] = useState('');
 
    const validateEmail = (email) => {
-     // Regular expression for basic email validation
      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
      return emailRegex.test(email);
   };
   
-
+// handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateEmail(email)) {
@@ -45,21 +44,29 @@ const Newsletter = () => {
           <div className='my-4 lg:border-l-2 border-royal-amethyst lg:-ml-12 lg:pl-8'>
             <form
               onSubmit={handleSubmit}
-              className='flex flex-col sm:flex-row items-center justify-between w-full'>
+              className='flex flex-col sm:flex-row items-center justify-between w-full'
+            >
               <input
                 className='p-3 flex w-full rounded-md text-black border-2 border-royal-amethyst border-opacity-45'
                 type='email'
                 placeholder='Enter your email'
                 onChange={(e) => setEmail(e.target.value)}
-                
               />
+
               <button className='bg-royal-amethyst text-light-ash rounded-lg font-medium w-[200px] ml-4 my-6 px-6 py-3 hover:bg-golden-saffron hover:rounded-full font-m-plus'>
                 Notify Me
               </button>
             </form>
+            {errorMessage && (
+              <p
+                style={{ color: 'red', display: 'block', marginTop: '-15px' }}
+              >
+                {errorMessage}
+              </p>
+            )}
             <p>
               We care bout the protection of your data. Read our{' '}
-              <span className='text-royal-amethyst cursor-pointer  hover:font-semibold'>
+              <span className='text-golden-saffron cursor-pointer  hover:font-semibold'>
                 Privacy Policy.
               </span>
             </p>
