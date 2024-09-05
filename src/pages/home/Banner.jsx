@@ -50,7 +50,7 @@ const items = [
 
 const Banner = () => {
   const [selectedId, setSelectedId] = useState(null);
-   const [descriptionLength, setDescriptionLength] = useState(110); 
+  const [descriptionLength, setDescriptionLength] = useState(110);
 
   useEffect(() => {
     AOS.init({
@@ -58,30 +58,32 @@ const Banner = () => {
     });
   }, []);
 
- useEffect(() => {
-   const updateDescriptionLength = () => {
-     if (window.innerWidth >= 1280) {
-       setDescriptionLength(250); 
-     } else if (window.innerWidth >= 1024) {
-       setDescriptionLength(110); 
-     } 
-   };
+  useEffect(() => {
+    const updateDescriptionLength = () => {
+      if (window.innerWidth >= 1280) {
+        setDescriptionLength(260);
+      } else if (window.innerWidth >= 1024) {
+        setDescriptionLength(150);
+      }
+    };
 
-   window.addEventListener('resize', updateDescriptionLength);
-   updateDescriptionLength(); 
+    window.addEventListener('resize', updateDescriptionLength);
+    updateDescriptionLength();
 
-   return () => window.removeEventListener('resize', updateDescriptionLength);
- }, []);
+    return () => window.removeEventListener('resize', updateDescriptionLength);
+  }, []);
 
   return (
     <div className='flex flex-col-reverse lg:flex-row gap-x-4 lg:mx-2'>
       {/* left side: framer motion */}
-      <div className='hidden relative lg:w-1/2 lg:grid lg:grid-cols-1 xl:grid-cols-3 gap-2 h-[500px] m-5 lg:m-0'>
+      <div className='hidden relative lg:w-1/2 lg:grid lg:grid-cols-1 xl:grid-cols-3 gap-2 h-[575px] m-5 lg:m-0'>
         {items.map((item, index) => (
           <motion.div
             key={item.id}
             className={`${
-              index === 1 || index === 2 ? 'col-span-1 xl:col-span-2' : 'col-span-1'
+              index === 1 || index === 2
+                ? 'col-span-1 md:col-span-2'
+                : 'col-span-1'
             } bg-${
               index === 1 || index === 2 ? 'royal-amethyst' : 'golden-saffron'
             } p-2 cursor-pointer rounded-xl space-y-2 shadow-sm bg-opacity-75 rounded-se-[3rem] rounded-es-[3rem]`}
@@ -90,18 +92,22 @@ const Banner = () => {
             data-aos='zoom-in-right'
             data-aos-duration='3000'
           >
-            <motion.div className='font-semibold -mb-[3px] xl:-mb--0 xl:pt-2'>{item.title}</motion.div>
+            <motion.div className='font-semibold -mb-[3px] xl:-mb--0 xl:pt-2'>
+              {item.title}
+            </motion.div>
             {index === 0 || index === 3 ? (
               <motion.div>
                 <motion.h2>{item.description.slice(0, 110)}.....</motion.h2>
-                <motion.button className=' border-black rounded-xl px-2 xl:mt-4  ml-[330px] xl:ml-16 border-b-2  hover:scale-105'>
+                <motion.button className=' border-black rounded-xl px-2 xl:mt-6  ml-[330px] xl:ml-16 border-b-2  hover:scale-105'>
                   Read More
                 </motion.button>
               </motion.div>
             ) : (
               <motion.div>
-                <motion.h2>{item.description.slice(0, descriptionLength)}.....</motion.h2>
-                <motion.button className='block border-black rounded-xl px-2 xl:mt-4 ml-[330px] xl:ml-60 border-b-2 hover:scale-105'>
+                <motion.h2>
+                  {item.description.slice(0, descriptionLength)}.....
+                </motion.h2>
+                <motion.button className='block border-black rounded-xl px-2 xl:mt-6 ml-[330px] xl:ml-60 border-b-2 hover:scale-105'>
                   Read More
                 </motion.button>
               </motion.div>
@@ -119,7 +125,6 @@ const Banner = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setSelectedId(null)}
-
                 transition={{ duration: 0.3 }}
               />
 
@@ -147,9 +152,9 @@ const Banner = () => {
           )}
         </AnimatePresence>
       </div>
-{/* right side : swiper */}
+      {/* right side : swiper */}
       <div
-        className='lg:w-1/2 h-[500px] m-5 lg:m-0'
+        className='lg:w-1/2 h-[600px] m-5 lg:m-0'
         data-aos='fade-left'
         data-aos-duration='3000'
       >
@@ -174,7 +179,7 @@ const Banner = () => {
           {/* slide 1 */}
           <SwiperSlide>
             <img
-              className='h-[500px] w-full rounded-xl'
+              className='h-[575px] w-full rounded-xl'
               src={carousel1}
               alt=''
             />
@@ -182,7 +187,7 @@ const Banner = () => {
           {/* slide 2 */}
           <SwiperSlide>
             <img
-              className='h-[500px] w-full rounded-xl'
+              className='h-[575px] w-full rounded-xl'
               src={carousel2}
               alt=''
             />
@@ -191,7 +196,7 @@ const Banner = () => {
           <SwiperSlide>
             <div>
               <img
-                className='h-[500px] w-full rounded-xl'
+                className='h-[575px] w-full rounded-xl'
                 src={carousel3}
                 alt=''
               />

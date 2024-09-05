@@ -44,7 +44,7 @@ const RecentPosts = () => {
 
   return (
     <div>
-      <div id='recent-posts' className='lg:pt-4 space-y-8 lg:space-y-10'>
+      <div id='recent-posts' className='lg:pt-8 space-y-8 lg:space-y-10'>
         <SectionTitle title='Recent Posts' />
 
         

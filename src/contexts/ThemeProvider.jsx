@@ -3,22 +3,22 @@ import { createContext, useEffect, useState } from 'react';
 
 export const ThemeContext = createContext(null);
 
- const themes = {
-   light: {
-     colors: {
-       primary: 'text-golden-saffron',
-       background: 'bg-light-ash',
-       textPrimary: 'text-midnight-indigo',
-     },
-   },
-   dark: {
-     colors: {
-       primary: 'text-royal-amethyst',
-       background: 'bg-midnight-indigo',
-       textPrimary: 'text-light-ash',
-     },
-   },
- };
+const themes = {
+  light: {
+    colors: {
+      primary: 'text-golden-saffron',
+      background: 'bg-light-ash',
+      textPrimary: 'text-midnight-indigo',
+    },
+  },
+  dark: {
+    colors: {
+      primary: 'text-royal-amethyst',
+      background: 'bg-blue-950',
+      textPrimary: 'text-light-ash',
+    },
+  },
+};
 
 const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
@@ -27,16 +27,13 @@ const ThemeProvider = ({ children }) => {
   });
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => 
-      prevTheme === 'light' ? 'dark' : 'light'
-    );
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
   useEffect(() => {
     localStorage.setItem('theme', theme);
     document.querySelector('html').setAttribute('data-theme', theme);
   }, [theme]);
-
 
   return (
     <ThemeContext.Provider value={{ theme: themes[theme], toggleTheme }}>

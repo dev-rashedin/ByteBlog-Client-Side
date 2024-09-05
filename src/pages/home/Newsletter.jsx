@@ -27,7 +27,7 @@ const Newsletter = () => {
   return (
     <div className='pt-4'>
       <SectionTitle title='Newsletter' />
-      <div className=' mt-8 py-16  px-4 border-2 border-golden-saffron border-dotted border-opacity-75 border-b-4 border-r-4 hover:scale-[1.01] hover:transition-all hover:border-dashed hover:duration-300 rounded-xl rounded-es-3xl rounded-se-3xl mx-4'>
+      <div className=' mt-8 py-16  px-4 border-2 border-royal-amethyst border-dotted border-opacity-75 border-b-4 border-r-4 hover:scale-[1.01] hover:transition-all hover:border-dashed hover:duration-300 rounded-xl rounded-es-3xl rounded-se-3xl mx-4'>
         <div className='max-w-[1240px] mx-auto grid lg:grid-cols-3'>
           {/* left side */}
           <div className='lg:col-span-2 my-4 -mt-2'>

@@ -3,6 +3,7 @@ import Banner from '../home/Banner'
 import RecentPosts from '../home/RecentPosts';
 import Newsletter from '../home/Newsletter';
 import DeveloperTools from '../home/DeveloperTools';
+import DeveloperTestimonial from '../home/DeveloperTestimonial';
 
 const Home = () => {
   
@@ -10,8 +11,9 @@ const Home = () => {
     <div className='space-y-16'>
       <Banner />
       <RecentPosts />
+      <DeveloperTools />
+      <DeveloperTestimonial/>
       <Newsletter />
-      <DeveloperTools/>
     </div>
   )
 }

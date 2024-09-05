@@ -48,13 +48,13 @@ const DeveloperTools = () => {
   ];
 
   return (
-    <section className='py-4'>
+    <section className='pt-8'>
       <div className=' px-4'>
         <div className='text-center'>
           <div
             data-aos='flip-left'
             data-aos-duration='2000'
-            className='text-3xl font-bold  mb-4'
+            className='text-3xl md:text-4xl lg:text-5xl font-bold  mb-4'
           >
             Top Developer Tools & Resources
           </div>
@@ -67,7 +67,7 @@ const DeveloperTools = () => {
           {tools.map((tool, index) => (
             <div
               key={index}
-              className='p-6  drop-shadow-sm border-2 border-b-4  border-royal-amethyst mx-auto border-dashed rounded-xl '
+              className='p-6  drop-shadow-sm border-2 border-b-4  border-golden-saffron mx-auto border-dashed rounded-xl '
             >
               <div className='text-2xl font-semibold mb-4 flex items-center gap-2'>
                 <span>{tool.icon}</span>
@@ -84,15 +84,18 @@ const DeveloperTools = () => {
                   <span className='font-extrabold ml-2'>{tool.downloads}</span>
                 </p>
               </div>
-              <a
-                href={tool.link}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-golden-saffron 
-                hover:underline hover:font-semibold'
-              >
-                Visit {tool.name}
-              </a>
+              <div className='flex gap-1'>
+                <p>Visit</p>
+                <a
+                  href={tool.link}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='text-royal-amethyst 
+                hover:underline font-semibold'
+                >
+                   {tool.name}
+                </a>
+              </div>
             </div>
           ))}
         </div>
