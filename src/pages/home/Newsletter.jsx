@@ -32,7 +32,7 @@ const Newsletter = () => {
           {/* left side */}
           <div className='lg:col-span-2 my-4 -mt-2'>
             <h1 className='lg:text-4xl md:text-3xl text-2xl font-bold py-2'>
-              <BsEnvelopePaperHeart className='text-royal-amethyst ml-1 mb-2' />
+              <BsEnvelopePaperHeart className='text-golden-saffron ml-1 mb-2' />
               Looking to Level Up Your Web Development Skills?
             </h1>
             <p>

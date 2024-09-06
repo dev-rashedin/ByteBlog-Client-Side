@@ -59,7 +59,7 @@ const RecentPosts = () => {
                 duration={3000}
                 delay={index * 200}
               >
-                <PostCard post={post} />
+                <PostCard post={post} type='blog' />
               </Fade>
             ))}
           </div>

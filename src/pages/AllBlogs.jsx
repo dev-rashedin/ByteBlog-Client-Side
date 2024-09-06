@@ -17,40 +17,40 @@ const AllBlogs = () => {
   const [searchText, setSearchText] = useState('');
 
   // getting posts count
-   useEffect(() => {
-     const getCount = async () => {
-       const { data } = await axios(
-         `${
-           import.meta.env.VITE_API_URL
-         }/postCount?filter=${filter}&search=${search}`
-       );
+  useEffect(() => {
+    const getCount = async () => {
+      const { data } = await axios(
+        `${
+          import.meta.env.VITE_API_URL
+        }/postCount?filter=${filter}&search=${search}`
+      );
 
-       setCount(data.count);
-     };
-     getCount();
-   }, [filter, search]);
+      setCount(data.count);
+    };
+    getCount();
+  }, [filter, search]);
 
   // getting post data
-    const {
-      data: posts,
-      isLoading,
-      isError,
-      error,
-    } = useQuery({
-      queryKey: ['posts', currentPage, filter, itemsPerPage, sort, search],
-      queryFn: async () => {
-        const { data } = await axios.get(
-          `${
-            import.meta.env.VITE_API_URL
-          }/all-posts?page=${currentPage}&size=${itemsPerPage}&filter=${filter}&sort=${sort}&search=${search}`
-        );
-        return data;
-      },
-      onError: (error) => {
-        console.log('Error fetching data:', error);
-      },
-    });
-  
+  const {
+    data: posts,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ['posts', currentPage, filter, itemsPerPage, sort, search],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        `${
+          import.meta.env.VITE_API_URL
+        }/all-posts?page=${currentPage}&size=${itemsPerPage}&filter=${filter}&sort=${sort}&search=${search}`
+      );
+      return data;
+    },
+    onError: (error) => {
+      console.log('Error fetching data:', error);
+    },
+  });
+
   const postsPerPage = Math.ceil(count / itemsPerPage);
 
   const pages = [...Array(postsPerPage).keys()].map((ell) => ell + 1);
@@ -86,25 +86,25 @@ const AllBlogs = () => {
     setSearch(searchText);
   };
 
-    // handling loading state
-    if (isLoading)
-      return (
-        <div className='flex items-center justify-center min-h-screen text-yellow-500'>
-          Data Loading{' '}
-          <span className='loading loading-dots loading-md mr-10'></span>
-        </div>
-      );
+  // handling error
+  if (isError)
+    return (
+      <p className='flex items-center justify-center min-h-screen text-red-400'>
+        {error.message}
+      </p>
+    );
 
-    // handling error
-    if (isError)
-      return (
-        <p className='flex items-center justify-center min-h-screen text-red-400'>
-          {error.message}
-        </p>
-      );
+  // handling loading state
+  if (isLoading)
+    return (
+      <div className='flex items-center justify-center min-h-screen text-yellow-500'>
+        Data Loading{' '}
+        <span className='loading loading-dots loading-md mr-10'></span>
+      </div>
+    );
 
   return (
-    <div id='recent-posts' className='lg:pt-4 space-y-8 lg:space-y-10'>
+    <div className='lg:pt-4 space-y-8 lg:space-y-10'>
       <SectionTitle title='All Posts' />
 
       {/* searching and sorting */}
@@ -177,7 +177,7 @@ const AllBlogs = () => {
       {/* mapping the all posts data */}
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-6 mx-5 lg:mx-3'>
         {posts?.slice(0, 6).map((post) => (
-          <PostCard key={post._id} post={post} />
+          <PostCard key={post._id} post={post} type='blog' />
         ))}
       </div>
 

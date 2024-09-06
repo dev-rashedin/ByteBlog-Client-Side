@@ -11,13 +11,7 @@ import { useEffect, useState } from 'react';
 
 
 
-const items = [
-  { to: '/', label: 'Home' },
-  { to: '/allBlogs', label: 'All Blogs' },
-  { to: '/addBlog', label: 'Add Blog' },
-  { to: '/featured', label: 'Featured Blogs' },
-  { to: '/wishlist', label: 'Wishlist' },
-];
+
 
 const Navbar = () => {
 
@@ -35,6 +29,14 @@ const Navbar = () => {
 
     return () => clearTimeout(timeout);
   }, []);
+
+  const items = [
+    { to: '/', label: 'Home' },
+    { to: '/allBlogs', label: 'All Blogs' },
+    { to: '/addBlog', label: 'Add Blog' },
+    { to: '/featured', label: 'Featured Blogs' },
+    { to:  `/wishlists/${user?.email}`, label: 'Wishlist' },
+  ];
 
 
 

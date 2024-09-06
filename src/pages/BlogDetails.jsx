@@ -9,49 +9,62 @@ import SectionTitle from "../components/SectionTitle";
 
 
 
+
 const BlogDetails = () => {
-  const {user} = useAuth()
+  const { user } = useAuth()
+  console.log(user)
+  
   const { id } = useParams();
+  console.log(user, id)
+  
+  
   
    const queryClient = useQueryClient();
 
   // const post = useLoaderData()
 
-  // getting post data
-  const {
-    data: post = [],
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ['post'],
-    queryFn: async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/posts/${id}`
-      );
-      return data;
-    },
-    onError: (error) => {
-      console.log('Error fetching data:', error);
-    },
-    enabled: !!id,
-  });
+  if (!id) {
+    return <div>Loading...</div>
+  }
 
-  // getting comment data
-  const {
-    data: comments = [],
-  } = useQuery({
-    queryKey: ['comments', id],
-    queryFn: async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/comments/${id}`
-      );
-      return data;
-    },
-    onError: (error) => {
-      console.log('Error fetching data:', error);
-    }
-  });
+  // getting post data
+ const {
+   data: post = [],
+   isLoading,
+   isError,
+   error,
+ } = useQuery({
+   queryKey: ['post', id],
+   queryFn: async () => {
+     const { data } = await axios.get(
+       `${import.meta.env.VITE_API_URL}/posts/${id}`
+     );
+     return data;
+   },
+   onError: (error) => {
+     console.log('Error fetching post:', error);
+   },
+   enabled: !!id
+ });
+
+ console.log('Post Data:', post);
+
+ // Fetching comments data
+ const {
+   data: comments = [],
+ } = useQuery({
+   queryKey: ['comments', id],
+   queryFn: async () => {
+     const { data } = await axios.get(
+       `${import.meta.env.VITE_API_URL}/comments/${id}`
+     );
+     return data;
+   },
+   onError: (error) => {
+     console.log('Error fetching comments:', error);
+   },
+   enabled: !!id,
+ });
 
   // posting comment
   const { mutateAsync } = useMutation({
@@ -83,7 +96,10 @@ const BlogDetails = () => {
      short_description,
      createdAt,
      long_description,
-   } = post;
+  } = post;
+  
+  console.log(post)
+  
 
   
    const handleComment = async (e) => {

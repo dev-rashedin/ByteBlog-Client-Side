@@ -1,34 +1,9 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import useAxiosSecure from '../hooks/useAxiosSecure';
-import useAuth from '../hooks/useAuth';
 
-const PostCard = ({ post, type }) => {
-  const { user } = useAuth();
-
-  const queryClient = useQueryClient();
-
-  const axiosSecure = useAxiosSecure();
-
-  const { mutateAsync } = useMutation({
-    mutationFn: async (wishlistPost) => {
-      const { data } = await axiosSecure.post(`/wishlists`, wishlistPost);
-      return data;
-    },
-    onSuccess: (data) => {
-      if (data.insertedId) {
-        toast.success('Successfully added to wishlist');
-        queryClient.invalidateQueries({ queryKey: ['wishlists'] });
-      }
-    },
-    onError: (error) => {
-      const errorMessage =
-        error.response?.data?.message || 'Failed to add to wishlist';
-      toast.error(errorMessage);
-    },
-  });
-
+const WishlistCard = ({ wishlist }) => {
+  console.log(wishlist)
+  
   // destructuring post
   const {
     _id,
@@ -38,27 +13,7 @@ const PostCard = ({ post, type }) => {
     image,
     short_description,
     createdAt,
-  } = post;
-
-  // handle wishlist
-  const handleWishlist = async (post) => {
-    const wishlistPost = {
-      _id,
-          post_title,
-          category,
-          writer_email: email,
-          short_description,
-          createdAt,
-          image,
-          viewer_email: user.email
-     }
-
-    try {
-      await mutateAsync(wishlistPost);
-    } catch (error) {
-      toast.error(error);
-    }
-  };
+  } = wishlist;
 
   return (
     <div className='max-w-2xl px-8 py-4 rounded-lg shadow-xl border-2 border-royal-amethyst border-opacity-75 border-t-4 border-r-4 border-dotted hover:scale-[1.01] hover:transition-all hover:border-dashed hover:duration-300 rounded-se-3xl rounded-es-3xl'>
@@ -69,19 +24,19 @@ const PostCard = ({ post, type }) => {
         </p>
         <p
           className={`px-3 py-1 text-sm font-bold ${
-            post.category === 'HTML/CSS' &&
+            wishlist.category === 'HTML/CSS' &&
             'text-blue-600 bg-blue-200 bg-opacity-75'
           } ${
-            post.category === 'JavaScript' &&
+            wishlist.category === 'JavaScript' &&
             'text-emerald-600 bg-emerald-200 bg-opacity-75'
           } ${
-            post.category === 'Node JS' &&
+            wishlist.category === 'Node JS' &&
             'text-pink-600 bg-pink-200 bg-opacity-75'
           } ${
-            post.category === 'MongoDB' &&
+            wishlist.category === 'MongoDB' &&
             'text-yellow-600 bg-yellow-200 bg-opacity-75'
           } ${
-            post.category === 'React JS' &&
+            wishlist.category === 'React JS' &&
             'text-purple-600 bg-purple-200 bg-opacity-75'
           } rounded-full px-2 font-m-plus`}
         >
@@ -111,14 +66,18 @@ const PostCard = ({ post, type }) => {
 
         <div className='flex items-center'>
           <button
-            onClick={() => handleWishlist(post)}
             className='font-semibold  cursor-pointer border-2 border-golden-saffron px-2 border-opacity-45 rounded-lg hover:border-opacity-100 font-m-plus'
           >
-            {type === 'blog' ? 'Wishlist' : 'Remove from Wishlist'}
+            Remove from Wishlist
           </button>
         </div>
       </div>
     </div>
   );
-};
-export default PostCard;
+}
+
+WishlistCard.propTypes = {
+  wishlist: PropTypes.object.isRequired, 
+}
+
+export default WishlistCard

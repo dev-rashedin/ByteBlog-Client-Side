@@ -1,13 +1,22 @@
 import AOS from 'aos';
 import 'aos/dist/aos.css'; 
-import { FaGithub, FaFigma } from 'react-icons/fa';
+import {
+  FaGithub,
+  FaFigma,
+  FaDownload,
+  FaExternalLinkAlt,
+} from 'react-icons/fa';
 import { SiPostman } from 'react-icons/si';
 import { VscVscode } from 'react-icons/vsc';
+import { Rating } from '@smastrom/react-rating';
+
+import '@smastrom/react-rating/style.css';
 
 
 AOS.init();
 
 const DeveloperTools = () => {
+ 
   const tools = [
     {
       icon: <VscVscode color='blue' />,
@@ -15,7 +24,7 @@ const DeveloperTools = () => {
       description:
         'Visual Studio Code is a free, lightweight code editor for web and cloud applications. It supports JavaScript, TypeScript, and Node.js, with extensions for many languages and features like IntelliSense for smarter coding.',
       link: 'https://code.visualstudio.com/',
-      rating: 4.8,
+      rating: 4.9,
       downloads: '20M+',
     },
     {
@@ -24,7 +33,7 @@ const DeveloperTools = () => {
       description:
         'Postman is an API development platform for building, testing, and documenting APIs. Its tools streamline the API lifecycle with automated testing, collaboration, and mock servers for efficient development.',
       link: 'https://www.postman.com/',
-      rating: 4.7,
+      rating: 4.3,
       downloads: '15M+',
     },
     {
@@ -33,7 +42,7 @@ const DeveloperTools = () => {
       description:
         'Figma is a collaborative design tool for creating user interfaces. It supports real-time collaboration, vector editing, and prototyping, making it ideal for designing web and mobile interfaces with design system consistency.',
       link: 'https://www.figma.com/',
-      rating: 4.9,
+      rating: 4.6,
       downloads: '10M+',
     },
     {
@@ -42,7 +51,7 @@ const DeveloperTools = () => {
       description:
         'GitHub is a platform for version control and collaboration, supporting both public and private repositories. It integrates with Git and offers tools for automation, project management, and reviewing code efficiently.',
       link: 'https://github.com/',
-      rating: 4.9,
+      rating: 4.8,
       downloads: '30M+',
     },
   ];
@@ -75,17 +84,25 @@ const DeveloperTools = () => {
               </div>
               <p className=' mb-4'>{tool.description}</p>
               <div className='flex justify-between mb-3'>
-                <p>
-                  Developer Rating:
-                  <span className='font-extrabold ml-2'>{tool.rating}</span>
+                <p className='flex'>
+                  <span> Developer Rating:</span>
+                  <span className='font-extrabold ml-2 inline'>
+                    <Rating
+                      style={{ maxWidth: 100 }}
+                      value={tool.rating}
+                      readOnly={true}
+                    />
+                  </span>
                 </p>
-                <p>
+                <p className='flex gap-2 items-center'>
+                  <FaDownload color='purple' />
                   Total Download :
-                  <span className='font-extrabold ml-2'>{tool.downloads}</span>
+                  <span className='font-extrabold'>{tool.downloads}</span>
                 </p>
               </div>
-              <div className='flex gap-1'>
+              <div className='flex gap-2 text-lg items-center'>
                 <p>Visit</p>
+                <FaExternalLinkAlt />
                 <a
                   href={tool.link}
                   target='_blank'
@@ -93,7 +110,7 @@ const DeveloperTools = () => {
                   className='text-royal-amethyst 
                 hover:underline font-semibold'
                 >
-                   {tool.name}
+                  {tool.name}
                 </a>
               </div>
             </div>
