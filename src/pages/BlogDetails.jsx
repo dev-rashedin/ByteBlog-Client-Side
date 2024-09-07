@@ -7,6 +7,7 @@ import Button from "../components/Button";
 import CommentCard from "../components/CommentCard";
 import SectionTitle from "../components/SectionTitle";
 import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 
 
@@ -16,7 +17,9 @@ const BlogDetails = () => {
   
   const { id } = useParams();
   
-   const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
+  
+  const axiosSecure = useAxiosSecure()
 
   // const post = useLoaderData()
 
@@ -33,8 +36,8 @@ const BlogDetails = () => {
  } = useQuery({
    queryKey: ['post', id],
    queryFn: async () => {
-     const { data } = await axios.get(
-       `${import.meta.env.VITE_API_URL}/posts/${id}`
+     const { data } = await axiosSecure.get(
+       `/posts/${id}`
      );
      return data;
    },

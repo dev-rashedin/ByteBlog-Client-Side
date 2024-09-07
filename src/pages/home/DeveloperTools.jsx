@@ -62,7 +62,9 @@ const DeveloperTools = () => {
         <div className='text-center'>
           <div
             data-aos='flip-left'
-            data-aos-duration='2000'
+            data-aos-duration='3000'
+            data-aos-delay='300'
+            data-aos-easing='ease-out-cubic'
             className='text-3xl md:text-4xl lg:text-5xl font-bold  mb-4'
           >
             Top Developer Tools & Resources
