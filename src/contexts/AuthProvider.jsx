@@ -11,6 +11,7 @@ import {
   updateProfile
 } from 'firebase/auth';
 import auth from '../firebase/firebase.config';
+import axios from 'axios';
 
 
 
@@ -24,31 +25,20 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // set a observer
-  useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser)
-      console.log(currentUser)
-      setLoading(false)
-    })
-    
-    return () => unSubscribe();
-  },[])
-
   // create user
   const createUser = (email, password) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password)
+    return createUserWithEmailAndPassword(auth, email, password);
   };
 
   // update user
-  const updateUserProfile = ( name, photo) => {
-    setLoading(true)
+  const updateUserProfile = (name, photo) => {
+    setLoading(true);
     return updateProfile(auth.currentUser, {
       displayName: name,
-      photoURL: photo
-    })
-  }
+      photoURL: photo,
+    });
+  };
 
   // login user
   const logInUser = (email, password) => {
@@ -74,6 +64,43 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  // set a observer
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      const userEmail = currentUser?.email || user?.email;
+      const loggedUser = { email: userEmail };
+
+      setUser(currentUser);
+
+      setLoading(false);
+      // if user exists then issue a token
+      if (currentUser) {
+        axios
+          .post(`${import.meta.env.VITE_API_URL}/jwt`, loggedUser, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            // console.log('token response: ', res.data);
+          })
+          .catch((error) => {
+            console.error('Error issuing token:', error);
+          });
+      } else {
+        axios
+          .post(`${import.meta.env.VITE_API_URL}/logout`, loggedUser, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            // console.log(res.data);
+          })
+          .catch((error) => {
+            console.error('Error logging out:', error);
+          });
+      }
+    });
+
+    return () => unSubscribe();
+  }, []);
 
   const authInfo = {
     user,

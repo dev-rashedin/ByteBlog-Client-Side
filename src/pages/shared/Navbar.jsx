@@ -82,7 +82,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className={`dropdown-content rounded-box z-10 mt-3 ml-4 flex flex-col gap-4 shadow-xl w-40 pl-9 pt-12 pb-4 border-2 border-golden-saffron  ${theme?.colors?.background} ${theme?.colors?.textPrimary}`}
+            className={`dropdown-content rounded-box z-10 mt-3 ml-4 flex flex-col gap-4 shadow-xl w-48 pl-9 pt-12 pb-4 border-2 border-golden-saffron  ${theme?.colors?.background} ${theme?.colors?.textPrimary}`}
           >
             <Menu items={items} />
             {/* theme controller */}

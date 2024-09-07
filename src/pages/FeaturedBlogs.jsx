@@ -5,6 +5,8 @@ import SectionTitle from "../components/SectionTitle";
 
 
 
+
+
 const FeaturedBlogs = () => {
   const {
     data: posts,

@@ -1,9 +1,14 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
+import useAxiosSecure from '../hooks/useAxiosSecure';
+import { toast } from 'react-toastify';
 
 const WishlistCard = ({ wishlist }) => {
-  console.log(wishlist)
-  
+  const queryClient = useQueryClient();
+
+  const axiosSecure = useAxiosSecure();
+
   // destructuring post
   const {
     _id,
@@ -14,6 +19,37 @@ const WishlistCard = ({ wishlist }) => {
     short_description,
     createdAt,
   } = wishlist;
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async (id) => {     
+      console.log(id)
+      
+      const { data } = await axiosSecure.delete(`/wishlists/${id}`, id);
+      console.log(data);
+
+      return data;
+    },
+    onSuccess: (data) => {
+      if (data.deletedCount > 0) {
+        toast.success('Successfully removed from wishlist');
+
+        queryClient.invalidateQueries({ queryKey: ['wishlists'] });
+      }
+    },
+    onError: (error) => {
+      const errorMessage =
+        error.response?.data?.message || 'Failed to remove from wishlist';
+      toast.error(errorMessage);
+    },
+  });
+
+  const handleRemoveWishlist = async (id) => {
+    try {
+      await mutateAsync(id);
+    } catch (error) {
+      toast.error(error);
+    }
+  };
 
   return (
     <div className='max-w-2xl px-8 py-4 rounded-lg shadow-xl border-2 border-royal-amethyst border-opacity-75 border-t-4 border-r-4 border-dotted hover:scale-[1.01] hover:transition-all hover:border-dashed hover:duration-300 rounded-se-3xl rounded-es-3xl'>
@@ -66,6 +102,7 @@ const WishlistCard = ({ wishlist }) => {
 
         <div className='flex items-center'>
           <button
+            onClick={() => handleRemoveWishlist(_id)}
             className='font-semibold  cursor-pointer border-2 border-golden-saffron px-2 border-opacity-45 rounded-lg hover:border-opacity-100 font-m-plus'
           >
             Remove from Wishlist
