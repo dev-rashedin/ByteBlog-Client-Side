@@ -43,12 +43,11 @@ const Register = () => {
   });
 
   const handleRegister = ({ name, photo, email, password }) => {
-    console.log(name, photo, email, password);
 
     createUser(email, password)
       .then((result) => {
         toast.success('Your registration is successful');
-        console.log(result.user);
+       
         const creationTime = result.user?.metadata?.creationTime;
         const lastSignInTime = result.user?.metadata?.lastSignInTime;
 
@@ -57,7 +56,6 @@ const Register = () => {
         // post request
         axios.post(`${import.meta.env.VITE_API_URL}/users`, user)
           .then(res => {
-            console.log(res.data)
            if (res.data.insertedId) {
              Swal.fire({
                title: 'Success!',

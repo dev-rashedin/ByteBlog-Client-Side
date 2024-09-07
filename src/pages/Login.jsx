@@ -23,11 +23,9 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = ({ email, password }) => {
-    console.log(email, password);
 
     logInUser(email, password)
       .then((result) => {
-        console.log(result.user);
         const lastSignIn = result.user.metadata.lastSignInTime;
         const user = { email, lastSignIn };
 

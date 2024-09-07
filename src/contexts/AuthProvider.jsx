@@ -80,7 +80,7 @@ const AuthProvider = ({ children }) => {
             withCredentials: true,
           })
           .then((res) => {
-            // console.log('token response: ', res.data);
+            
           })
           .catch((error) => {
             console.error('Error issuing token:', error);
@@ -91,7 +91,7 @@ const AuthProvider = ({ children }) => {
             withCredentials: true,
           })
           .then((res) => {
-            // console.log(res.data);
+           
           })
           .catch((error) => {
             console.error('Error logging out:', error);

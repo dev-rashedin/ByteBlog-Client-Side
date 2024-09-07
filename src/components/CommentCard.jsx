@@ -2,9 +2,7 @@ import PropTypes from 'prop-types'
 import SectionTitle from './SectionTitle';
 
 
-const CommentCard = ({ comment }) => {
-  console.log(comment);
-  
+const CommentCard = ({ comment }) => { 
   return (
     <div>
       <div className='flex items-center mb-2'>

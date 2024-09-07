@@ -62,9 +62,6 @@ const BlogTable = ({ posts }) => {
    getSortedRowModel: getSortedRowModel(),
  });
 
-  console.log('Columns:', columns);
-  console.log('Table instance:', table);
-
   return (
     <div data-aos='fade-up'
     data-aos-duration='2500'>

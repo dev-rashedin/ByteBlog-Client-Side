@@ -4,6 +4,7 @@ import useAuth from "../hooks/useAuth";
 import SectionTitle from "../components/SectionTitle";
 import { Fade } from "react-awesome-reveal";
 import WishlistCard from "../components/WishlistCard";
+import { Helmet } from "react-helmet-async";
 
 
 const Wishlist = () => {
@@ -47,11 +48,13 @@ const Wishlist = () => {
       </div>
     );
   
-  console.log(wishlists)
-  
 
   return (
-    <div id='recent-posts' className='lg:pt-8 space-y-8 lg:space-y-10'>
+    <>
+     <Helmet>
+        <title>ByteBlog || Wishlist</title>
+      </Helmet>
+        <div id='recent-posts' className='pt-8 space-y-8 lg:space-y-10'>
       <SectionTitle title='Wishlist Posts' />
 
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-6 mx-5 lg:mx-3'>
@@ -70,6 +73,7 @@ const Wishlist = () => {
         ))}
       </div>
     </div>
-  );
+    </>
+  )
 }
 export default Wishlist

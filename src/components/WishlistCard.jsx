@@ -21,11 +21,8 @@ const WishlistCard = ({ wishlist }) => {
   } = wishlist;
 
   const { mutateAsync } = useMutation({
-    mutationFn: async (id) => {     
-      console.log(id)
-      
+    mutationFn: async (id) => {          
       const { data } = await axiosSecure.delete(`/wishlists/${id}`, id);
-      console.log(data);
 
       return data;
     },

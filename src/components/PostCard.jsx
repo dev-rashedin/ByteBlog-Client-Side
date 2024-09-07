@@ -50,8 +50,13 @@ const PostCard = ({ post, type }) => {
           short_description,
           createdAt,
           image,
-          viewer_email: user.email
-     }
+          viewer_email: user?.email
+    }
+    
+    if (!user) {
+     return toast.warn('You must login to wishlist any post')
+    }
+   
 
     try {
       await mutateAsync(wishlistPost);

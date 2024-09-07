@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import BlogTable from "./BlogTable";
 import SectionTitle from "../components/SectionTitle";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -44,9 +45,16 @@ const FeaturedBlogs = () => {
       </div>
     );
 
-  return <div>
-    <SectionTitle title='Featured Blogs'/>
-    <BlogTable posts={posts} />
-  </div>;
+  return (
+    <>
+      <Helmet>
+        <title>ByteBlog || Featured</title>
+      </Helmet>
+      <div>
+        <SectionTitle title='Featured Blogs' />
+        <BlogTable posts={posts} />
+      </div>
+    </>
+  );
 }
 export default FeaturedBlogs
