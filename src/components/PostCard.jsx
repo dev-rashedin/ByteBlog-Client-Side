@@ -26,6 +26,7 @@ const PostCard = ({ post, type }) => {
       const errorMessage =
         error.response?.data?.message || 'Failed to add to wishlist';
       toast.error(errorMessage);
+      // console.error(errorMessage);
     },
   });
 
